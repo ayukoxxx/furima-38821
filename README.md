@@ -15,8 +15,7 @@
 - has_many :products
 - has_many :comments
 - has_many :likes
-- has_many :deliver_address
-- has_mane :purchase_record
+- has_many :purchase_record
 
 
 ## productsテーブル
@@ -40,7 +39,7 @@
 - has_many :likes
 - belongs_to :brand
 - belongs_to :category
-- has_one :purchase_table
+- has_many :purchase_record
 
 
 ## deliver_addressesテーブル
@@ -64,12 +63,13 @@
 | Column  | Type       | Options                       |
 | ------- | ---------- | ----------------------------- |
 | product   | references | null: false, foreign_key:true |
-| deliver_address| references | null: false, foreign_key:true |
+| user| references | null: false, foreign_key:true |
 
 
 ### Association
-- has_one :product
-- has_one :deliver_record
+- belongs_to :product
+- belongs_to :user
+- has_one: delivery_addresses
 
 
 
