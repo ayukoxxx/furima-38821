@@ -5,7 +5,7 @@
 | email              | string   | null: false, unique: true |
 | encrypted_password | string   | null: false               |
 | nickname           | string   | null: false               |
-| birthday           | datetime | null: false               |
+| birthday           | date     | null: false               |
 | family_name        | string   | null: false               |
 | first_name         | string   | null: false               |
 | family_name_kana   | string   | null: false               |
@@ -15,25 +15,24 @@
 - has_many :products
 - has_many :comments
 - has_many :likes
-- has_many :cards
 - has_many :deliver_address
+- has_mane :purchase_record
 
 
 ## productsテーブル
 
-| Column          | Type       | Options                       |
-| --------------- | ---------- | ----------------------------- |
-| name            | string     | null: false                   |
-| price           | integer    | null: false                   |
-| shipping_cost   | integer    | null: false                   |
-| condition       | string     | null: false                   |
-| ship_from       | string     | null: false                   |
-| ship_date       | string     | null: false                   |
-| introduction    | text       | null: false                   |
-| sell_user_id    | references | null: false, foreign_key:true |
-| buy_user_id     | references | foreign_key:true              |
-| brand           | references | foreign_key:true              |
-| category        | references | null: false, foreign_key:true |
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| name             | string     | null: false                   |
+| price            | integer    | null: false                   |
+| shipping_cost_id | integer    | null: false                   |
+| condition_id     | integer    | null: false                   |
+| area_id          | integer    | null: false                   |
+| ship_date_id     | integer    | null: false                   |
+| introduction     | text       | null: false                   |
+| user             | references | null: false, foreign_key:true |
+| brand            | references | foreign_key:true              |
+| category         | references | null: false, foreign_key:true |
 
 ### Association
 - belongs_to :user
@@ -41,38 +40,40 @@
 - has_many :likes
 - belongs_to :brand
 - belongs_to :category
+- has_one :purchase_table
 
 
-## deliver_addressテーブル
+## deliver_addressesテーブル
 
 | Column           | Type       | Options                       |
 | ---------------- | ---------- | ----------------------------- |
-| postcode         | integer    | null: false                   |
-| prefecture       | string     | null: false                   |
+| postcode         | string     | null: false                   |
+| area_id          | integer    | null: false                   |
 | municipality     | string     | null: false                   |
 | address          | string     | null: false                   |
 | building_name    | string     |                               |
-| telephone_number | integer    | null: false                   |
-| user             | references | null: false, foreign_key:true |
+| telephone_number | string     | null: false                   |
+| purchase_record  | references | null: false, foreign_key:true |
 
 
 ### Association
-- belongs_to :user
+- has_one :purchase_record
 
+## purchase_recordsテーブル
 
-## cardsテーブル
-
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| card   | integer    | null: false                   |
-| user   | references | null: false, foreign_key:true |
+| Column  | Type       | Options                       |
+| ------- | ---------- | ----------------------------- |
+| product   | references | null: false, foreign_key:true |
+| deliver_address| references | null: false, foreign_key:true |
 
 
 ### Association
-- belongs_to :user
+- has_one :product
+- has_one :deliver_record
 
 
-## comementsテーブル
+
+## commentsテーブル
 
 | Column  | Type       | Options                       |
 | ------- | ---------- | ----------------------------- |
