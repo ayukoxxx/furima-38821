@@ -1,24 +1,101 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type     | Options                   |
+| ------------------ | -------- | ------------------------- |
+| email              | string   | null: false, unique: true |
+| encrypted_password | string   | null: false               |
+| nickname           | string   | null: false               |
+| birthday           | date     | null: false               |
+| family_name        | string   | null: false               |
+| first_name         | string   | null: false               |
+| family_name_kana   | string   | null: false               |
+| first_name_kana    | string   | null: false               |
 
-Things you may want to cover:
+### Association
+- has_many :products
+- has_many :comments
+- has_many :likes
+- has_many :purchase_records
 
-* Ruby version
 
-* System dependencies
+## productsテーブル
 
-* Configuration
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| name             | string     | null: false                   |
+| price            | integer    | null: false                   |
+| shipping_cost_id | integer    | null: false                   |
+| condition_id     | integer    | null: false                   |
+| area_id          | integer    | null: false                   |
+| ship_date_id     | integer    | null: false                   |
+| introduction     | text       | null: false                   |
+| user             | references | null: false, foreign_key:true |
+| category_id      | integer    | null: false                   |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_many :comments
+- has_many :likes
+- has_one :purchase_record
 
-* Database initialization
 
-* How to run the test suite
+## deliver_addressesテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| postcode         | string     | null: false                   |
+| area_id          | integer    | null: false                   |
+| municipality     | string     | null: false                   |
+| address          | string     | null: false                   |
+| building_name    | string     |                               |
+| telephone_number | string     | null: false                   |
+| purchase_record  | references | null: false, foreign_key:true |
 
-* Deployment instructions
 
-* ...
+### Association
+- belongs_to :purchase_record
+
+## purchase_recordsテーブル
+
+| Column  | Type       | Options                       |
+| ------- | ---------- | ----------------------------- |
+| product | references | null: false, foreign_key:true |
+| user    | references | null: false, foreign_key:true |
+
+
+### Association
+- belongs_to :product
+- belongs_to :user
+- has_one: delivery_address
+
+
+
+## commentsテーブル
+
+| Column  | Type       | Options                       |
+| ------- | ---------- | ----------------------------- |
+| content | text       | null: false                   |
+| user    | references | null: false, foreign_key:true |
+| product | references | null: false, foreign_key:true |
+
+
+### Association
+- belongs_to :user
+- belongs_to :product
+
+
+## likesテーブル
+
+| Column  | Type       | Options                       |
+| ------- | ---------- | ----------------------------- |
+| like    | boolean    |                               |
+| user    | references | null: false, foreign_key:true |
+| product | references | null: false, foreign_key:true |
+
+
+### Association
+- belongs_to :user
+- belongs_to :product
+
+
+
