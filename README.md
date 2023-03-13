@@ -36,7 +36,7 @@
 - belongs_to :user
 - has_many :comments
 - has_many :likes
-- has_one :purchase_records
+- has_one :purchase_record
 
 
 ## deliver_addressesテーブル
@@ -64,9 +64,9 @@
 
 
 ### Association
-- has_one :product
+- belongs_to :product
 - belongs_to :user
-- has_one: delivery_addresses
+- has_one: delivery_address
 
 
 
