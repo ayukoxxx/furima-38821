@@ -15,7 +15,7 @@
 - has_many :products
 - has_many :comments
 - has_many :likes
-- has_many :purchase_record
+- has_many :purchase_records
 
 
 ## productsテーブル
@@ -30,16 +30,13 @@
 | ship_date_id     | integer    | null: false                   |
 | introduction     | text       | null: false                   |
 | user             | references | null: false, foreign_key:true |
-| brand            | references | foreign_key:true              |
-| category         | references | null: false, foreign_key:true |
+| category_id      | integer    | null: false                   |
 
 ### Association
 - belongs_to :user
 - has_many :comments
 - has_many :likes
-- belongs_to :brand
-- belongs_to :category
-- has_many :purchase_record
+- has_one :purchase_records
 
 
 ## deliver_addressesテーブル
@@ -56,18 +53,18 @@
 
 
 ### Association
-- has_one :purchase_record
+- belongs_to :purchase_record
 
 ## purchase_recordsテーブル
 
 | Column  | Type       | Options                       |
 | ------- | ---------- | ----------------------------- |
-| product   | references | null: false, foreign_key:true |
-| user| references | null: false, foreign_key:true |
+| product | references | null: false, foreign_key:true |
+| user    | references | null: false, foreign_key:true |
 
 
 ### Association
-- belongs_to :product
+- has_one :product
 - belongs_to :user
 - has_one: delivery_addresses
 
@@ -101,24 +98,4 @@
 - belongs_to :product
 
 
-## brandsテーブル
 
-| Column       | Type   | Options |
-| ------------ | ------ | ------- |
-| brand_name   | string |         |
-
-
-### Association
-- has_many :product
-
-
-
-## categoriesテーブル
-
-| Column          | Type   | Options    |
-| --------------- | ------ | ---------- |
-| category_name   | string | null:false |
-
-
-### Association
-- has_many :product
