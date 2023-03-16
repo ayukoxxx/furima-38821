@@ -14,7 +14,7 @@ class User < ApplicationRecord
     validates :first_name
   end
 
-  with_options presence: true, format: { with: /\A[ァ-ヴ一]+\z/u, message: 'は入力必須です（全角カナ）' } do
+  with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'は入力必須です（全角カナ）' } do
     validates :family_name_kana
     validates :first_name_kana
   end
