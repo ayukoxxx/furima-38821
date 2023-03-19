@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :move_to_signUp, except: [:index, :show]
 
   def index
-    @products = Product.order("created_at DESC")
   end
 
   def new
@@ -14,7 +13,6 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to root_path
     else
-      @product = Product.new(product_params)
       render "new"
     end
   end
