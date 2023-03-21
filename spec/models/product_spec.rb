@@ -63,17 +63,17 @@ RSpec.describe Product, type: :model do
       it '価格が300円未満だと登録できない' do
         @product.price = '299'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price は300円以上で設定してください（半角数字）")
+        expect(@product.errors.full_messages).to include("Price is out of setting range")
       end
       it '価格が1000万円以上だと登録できない' do
         @product.price = '10000000'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price は1,000万円未満で入力してください（半角数字）')
+        expect(@product.errors.full_messages).to include("Price is out of setting range")
       end
       it '価格が全角だと登録できない' do
         @product.price = '１１１１'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price は300円以上で設定してください（半角数字）')
+        expect(@product.errors.full_messages).to include('Price Half-width number')
       end
       it 'userが紐づいていないと登録できない' do
         @product.user = nil

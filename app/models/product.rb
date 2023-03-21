@@ -2,9 +2,10 @@ class Product < ApplicationRecord
 
 validates :image, presence: true
 validates :name, presence: true
-validates :price, presence: true,  numericality: { greater_than_or_equal_to: 300, message: "は300円以上で設定してください（半角数字）" }
-validates :price, length: { maximum: 7, message: 'は1,000万円未満で入力してください（半角数字）' }
+validates :price, numericality: {only_integer: true, message: 'Half-width number'}
+validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
 validates :introduction, presence: true
+validates :price, presence: true
 validates :category, presence: true
 validates :condition, presence: true
 validates :shipping_cost, presence: true
