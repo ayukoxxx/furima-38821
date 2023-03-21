@@ -75,6 +75,11 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include('Price は300円以上で設定してください（半角数字）')
       end
+      it 'userが紐づいていないと登録できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
