@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :postcode, :area_id, :municipality, :address, :building_name, :telephone_number, :user_id, :product_id
+  attr_accessor :postcode, :area, :municipality, :address, :building_name, :telephone_number, :user_id, :product_id
 
   with_options presence: true do
     validates :postcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
@@ -15,7 +15,7 @@ class PurchaseAddress
 
   def save
   purchase_record = PurchaseRecord.create(user_id: user_id, product_id: product_id)
-  DeliverAddress.create(postcode: postcode, area: area, municipality :municipality, address: address, building_name: building_name, telephone_number: telephone_number)
+  DeliverAddress.create(postcode: postcode, area: area, municipality :municipality, address: address, building_name: building_name, telephone_number: telephone_number, purchase_record_id: purchase_record.id)
   end
 
 

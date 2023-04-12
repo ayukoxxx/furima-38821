@@ -1,7 +1,7 @@
 class PurchaseRecordsController < ApplicationController
 
   def index
-    
+    @products = Product.new
   end
 
   def new
