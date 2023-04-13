@@ -8,7 +8,7 @@ class OrderAddress
     validates :postcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)"}
     validates :house_number
     validates :telephone_number,  format: {with: /\A0\d{9,}\z/, message: "is too short"}
-    validates :telephone_number,  format: {with: /\A0\d{9,10}\z/, message: "number is invalid. Input only number"}
+    validates :telephone_number,  format: {with: /\A0\d{9,10}\z/, message: "is invalid. Input only number"}
   end
   validates :area, numericality: {other_than: 0, message: "can't be blank"}
 
