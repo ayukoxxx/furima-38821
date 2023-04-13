@@ -1,4 +1,4 @@
-class OrderController < ApplicationController
+class OrdersController < ApplicationController
   def index
   
   end
@@ -17,9 +17,12 @@ class OrderController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def order_params
-    params.require(:order_address).permit(:postcode, :area, :municipality, :house_number, :building_name, :price, :telephone_number).merge(user_id: current_user.id)
+    params.require(:order_address).permit(:postcode, :area, :municipality, :house_number, :building_name, :price, :telephone_number).merge(user_id: current_user.id,product_id: params[:product_id])
   end
 end
