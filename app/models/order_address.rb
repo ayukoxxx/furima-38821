@@ -9,7 +9,7 @@ class OrderAddress
     validates :area_id
     validates :municipality
     validates :house_number
-    validates :telephone_number, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
+    validates :telephone_number, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid' }
     validates :token
   end
 
