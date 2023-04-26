@@ -49,7 +49,9 @@ class Area < ActiveHash::Base
     { id: 47, name: '沖縄' }
 
   ]
+  
   include ActiveHash::Associations
   has_many :products
+  has_many :addresses
 
   end

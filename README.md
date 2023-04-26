@@ -15,7 +15,7 @@
 - has_many :products
 - has_many :comments
 - has_many :likes
-- has_many :purchase_records
+- has_many :orders
 
 
 ## productsテーブル
@@ -36,26 +36,26 @@
 - belongs_to :user
 - has_many :comments
 - has_many :likes
-- has_one :purchase_record
+- has_one :order
 
 
-## deliver_addressesテーブル
+## addressesテーブル
 
 | Column           | Type       | Options                       |
 | ---------------- | ---------- | ----------------------------- |
 | postcode         | string     | null: false                   |
 | area_id          | integer    | null: false                   |
 | municipality     | string     | null: false                   |
-| address          | string     | null: false                   |
+| house_number     | string     | null: false                   |
 | building_name    | string     |                               |
 | telephone_number | string     | null: false                   |
-| purchase_record  | references | null: false, foreign_key:true |
+| order            | references | null: false, foreign_key:true |
 
 
 ### Association
-- belongs_to :purchase_record
+- belongs_to :order
 
-## purchase_recordsテーブル
+## ordersテーブル
 
 | Column  | Type       | Options                       |
 | ------- | ---------- | ----------------------------- |
@@ -66,7 +66,7 @@
 ### Association
 - belongs_to :product
 - belongs_to :user
-- has_one: delivery_address
+- has_one: address
 
 
 
